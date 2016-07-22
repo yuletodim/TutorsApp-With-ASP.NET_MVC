@@ -1,0 +1,66 @@
+﻿@using EdExTutorService.App.Models.BindingModels
+@model EmailBindingModel
+
+@{
+    ViewBag.Title = "Contact";
+}
+<div class="row">
+    <div class="box">
+        <div class="col-lg-12">
+            <hr>
+            <h2 class="intro-text text-center">Contact <strong>Ed - Ex Tutor Service</strong></h2>
+            <hr>
+        </div>
+        <div class="col-md-8">
+            <!-- Embedded Google Map using an iframe - to select your location find it on Google maps and paste the link as the iframe src. If you want to use the Google Maps API instead then have at it! -->
+            <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA07rAiY2Aa2D_mb4td-UzujlNmb-dzmAw&amp;q=208+Todor+Kableshkov,Sofia&amp;attribution_source=Google+Maps+Embed+API"></iframe>
+        </div>
+        <div class="col-md-4">
+            <p>Phone: <strong>0895 781 486</strong></p>
+            <p>Email: <strong><a href="mailto:edextutors@gmail.com">edextutors@gmail.com</a></strong></p>
+            <p> 
+                Address: <strong>208, Todor Kabaleshkov Str,
+                <br>1618 Sofia</strong>
+            </p>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="box">
+        <div class="col-lg-12">
+            <hr>
+            <h2 class="intro-text text-center">Contact <strong>form</strong></h2>
+            <hr>
+            <p style="text-align:center">Do not hesitate, call us.</p>
+            @using (Html.BeginForm("SendMail", "Home", FormMethod.Post, htmlAttributes: new { role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @:<div class="row">
+                    @:<div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.Name)
+                        @Html.TextBoxFor(m => m.Name, htmlAttributes: new { @class="form-control" })
+                    @:</div>
+                    @:<div class="form-group col-lg-4">
+                        @:<label>Email Address</label>
+                        @Html.Email(new { @class = "form-control", name="Email"})
+                    @:</div>
+                    @:<div class="form-group col-lg-4">
+                        @:<label>Phone Number</label>
+                        @Html.Tel(new { @class = "form-control" })
+                    @:</div>
+                    @:<div class="clearfix"></div>
+                    @:<div class="form-group col-lg-12">
+                        @Html.LabelFor(m => m.Message)
+                        @Html.TextAreaFor(m => m.Message, htmlAttributes:new { @class="form-control", rows="6" })
+                    @:</div>
+                    @:<div class="form-group col-lg-12">
+                        <input type="hidden" name="save" value="contact">
+                        @Html.Submit(new { @class = "btn btn-default" })
+                    @:</div>
+                @:</div>
+            }
+        </div>
+    </div>
+</div>
